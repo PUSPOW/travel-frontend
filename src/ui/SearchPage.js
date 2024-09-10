@@ -55,8 +55,11 @@ const SearchPage = () => {
                 className="w-full h-[500px] max-w-[26rem] shadow-lg -space-y-4"
               >
                 <CardHeader floated={false} color="blue-gray">
-                  <img src={`${imageUrl}${product_image}`} />
-                  <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
+                  <img
+                    src={`${imageUrl}${product_image}`}
+                    className="object-cover w-full h-48 md:h-60 lg:h-72"
+                  />
+                  <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
                   <IconButton
                     size="sm"
                     color="red"
@@ -75,7 +78,7 @@ const SearchPage = () => {
                 </CardHeader>
                 <CardBody>
                   <div>
-                    <div className="mb-3 flex items-center justify-between -space-y-2">
+                    <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between -space-y-2">
                       <Typography
                         variant="h5"
                         color="blue-gray"
@@ -103,8 +106,8 @@ const SearchPage = () => {
                       </Typography>
                     </div>
                     <Typography color="gray">{product_detail}</Typography>
-                    <div className="flex justify-between">
-                      <div className="flex">
+                    <div className="flex flex-col md:flex-row md:justify-between">
+                      <div className="flex items-center mb-2 md:mb-0">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
