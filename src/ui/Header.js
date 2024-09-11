@@ -149,12 +149,13 @@ const navListItems = [
   { label: "About us", href: "/about" },
 ];
 
-function NavList() {
+function NavList({ closeNav }) {
   const navigate = useNavigate();
 
   const location = window.location.pathname; // Get current route
 
   const handleScroll = (href) => {
+    closeNav();
     if (href.startsWith("/")) {
       // Navigate to external routes
       navigate(href);
@@ -260,8 +261,9 @@ const Header = () => {
         </Typography>
 
         <div className="hidden lg:block">
-          <NavList />
+          <NavList closeNav={() => setIsNavOpen(false)} />
         </div>
+
         <IconButton
           size="sm"
           color="blue-gray"
@@ -294,13 +296,16 @@ const Header = () => {
 
       {/* Mobile Nav */}
       <MobileNav open={isNavOpen}>
-        <NavList />
-
+        <NavList closeNav={() => setIsNavOpen(false)} />{" "}
+        {/* Pass closeNav to NavList */}
         {/* Show Log In / Sign Up in Mobile Nav */}
         {user === null && (
           <div className="flex items-center gap-4 mt-4">
             <Button
-              onClick={() => nav("/login")}
+              onClick={() => {
+                setIsNavOpen(false);
+                nav("/login");
+              }}
               size="sm"
               variant="text"
               fullWidth
@@ -308,7 +313,10 @@ const Header = () => {
               Log In
             </Button>
             <Button
-              onClick={() => nav("/signup")}
+              onClick={() => {
+                setIsNavOpen(false);
+                nav("/signup");
+              }}
               size="sm"
               color="red"
               variant="text"
