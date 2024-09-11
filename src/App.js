@@ -21,6 +21,7 @@ import SearchPage from "./ui/SearchPage";
 import AllCards from "./ui/AllCards";
 import Video from "./ui/Video";
 import Finding from "./ui/Finding";
+import AboutUs from "./ui/AboutUs";
 
 const App = () => {
   const Router = createBrowserRouter([
@@ -63,6 +64,7 @@ const App = () => {
         { path: "all-cards", element: <AllCards /> },
         { path: "questions-section", element: <Video /> },
         { path: "video", element: <Finding /> },
+        { path: "about", element: <AboutUs /> },
       ],
     },
   ]);

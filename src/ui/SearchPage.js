@@ -16,18 +16,18 @@ import {
 import { imageUrl } from "../constant/constant";
 import Places from "./Places";
 import Search from "./Search";
+import Footer from "./Footer";
 
 const SearchPage = () => {
   const { query, startDate, endDate } = useParams();
 
   const { data, isLoading } = useSearchProductsQuery({ search: query });
-  console.log(data);
   const nav = useNavigate();
   if (isLoading) {
     return <h1>loading...</h1>;
   }
   return (
-    <div className="px-5 py-5 space-y-5">
+    <div className="container space-y-5 mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex justify-center">
         <Search />
       </div>
@@ -38,7 +38,7 @@ const SearchPage = () => {
       >
         Searched cabins
       </Typography>
-      <div className="p-5 grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {data?.data.map(
           ({
             _id,
@@ -52,19 +52,20 @@ const SearchPage = () => {
             return (
               <Card
                 key={_id}
-                className="w-full h-[500px] max-w-[26rem] shadow-lg -space-y-4"
+                className="w-full h-[500px] max-w-[26rem] shadow-lg"
               >
                 <CardHeader floated={false} color="blue-gray">
                   <img
                     src={`${imageUrl}${product_image}`}
-                    className="object-cover w-full h-48 md:h-60 lg:h-72"
+                    alt={product_name}
+                    className="object-cover w-full h-40"
                   />
-                  <div className="absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60" />
+                  <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-transparent to-black/60" />
                   <IconButton
                     size="sm"
                     color="red"
                     variant="text"
-                    className="!absolute top-4 right-4 rounded-full"
+                    className="absolute top-4 right-4 rounded-full"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -78,7 +79,7 @@ const SearchPage = () => {
                 </CardHeader>
                 <CardBody>
                   <div>
-                    <div className="mb-3 flex flex-col md:flex-row md:items-center md:justify-between -space-y-2">
+                    <div className="mb-3 flex items-center justify-between">
                       <Typography
                         variant="h5"
                         color="blue-gray"
@@ -88,7 +89,7 @@ const SearchPage = () => {
                       </Typography>
                       <Typography
                         color="blue-gray"
-                        className="flex items-center gap-1.5 font-normal"
+                        className="flex items-center gap-1.5"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -106,15 +107,15 @@ const SearchPage = () => {
                       </Typography>
                     </div>
                     <Typography color="gray">{product_detail}</Typography>
-                    <div className="flex flex-col md:flex-row md:justify-between">
-                      <div className="flex items-center mb-2 md:mb-0">
+                    <div className="flex justify-between mt-2">
+                      <div className="flex items-center">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           fill="none"
                           viewBox="0 0 24 24"
                           strokeWidth={1.5}
                           stroke="currentColor"
-                          className="size-6"
+                          className="h-6 w-6"
                         >
                           <path
                             strokeLinecap="round"
@@ -127,20 +128,17 @@ const SearchPage = () => {
                             d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
                           />
                         </svg>
-
-                        <Typography className="underline " color="gray">
+                        <Typography className="underline" color="gray">
                           {product_place}
                         </Typography>
                       </div>
-                      <div>
-                        <Typography className="underline " color="gray">
-                          NPR. {product_price}
-                        </Typography>
-                      </div>
+                      <Typography className="underline" color="gray">
+                        NPR. {product_price}
+                      </Typography>
                     </div>
-                    <div className="group mt-8 inline-flex flex-wrap items-center gap-3">
+                    <div className="mt-2 flex gap-2">
                       <Tooltip content="Free wifi">
-                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -155,21 +153,8 @@ const SearchPage = () => {
                           </svg>
                         </span>
                       </Tooltip>
-                      <Tooltip content="2 bedrooms">
-                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="h-5 w-5"
-                          >
-                            <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
-                            <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
-                          </svg>
-                        </span>
-                      </Tooltip>
                       <Tooltip content={`65" HDTV`}>
-                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -185,8 +170,21 @@ const SearchPage = () => {
                           </svg>
                         </span>
                       </Tooltip>
+                      <Tooltip content="2 bedrooms">
+                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="currentColor"
+                            className="h-5 w-5"
+                          >
+                            <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                            <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+                          </svg>
+                        </span>
+                      </Tooltip>
                       <Tooltip content="Fire alert">
-                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24"
@@ -201,11 +199,6 @@ const SearchPage = () => {
                           </svg>
                         </span>
                       </Tooltip>
-                      <Tooltip content="And +20 more">
-                        <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
-                          +20
-                        </span>
-                      </Tooltip>
                     </div>
                   </div>
                 </CardBody>
@@ -213,7 +206,7 @@ const SearchPage = () => {
                   <Button
                     onClick={() => nav(`/product/${_id}`)}
                     size="lg"
-                    fullWidth={true}
+                    fullWidth
                   >
                     Reserve
                   </Button>
@@ -234,6 +227,9 @@ const SearchPage = () => {
       </div>
       <div>
         <Places />
+      </div>
+      <div>
+        <Footer />
       </div>
     </div>
   );

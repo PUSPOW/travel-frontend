@@ -12,7 +12,6 @@ import {
   Avatar,
   IconButton,
   MobileNav,
-  Collapse,
 } from "@material-tailwind/react";
 import {
   UserCircleIcon,
@@ -23,76 +22,32 @@ import {
   PowerIcon,
   Bars2Icon,
   ShoppingCartIcon,
-  CubeTransparentIcon,
-  CodeBracketSquareIcon,
 } from "@heroicons/react/24/solid";
 import { useDispatch, useSelector } from "react-redux";
-import { userLogOut } from "../features/auth/userSlice";
 import { useNavigate } from "react-router";
+import { userLogOut } from "../features/auth/userSlice";
 import { clearCart } from "../features/user/CartSlice";
 import LogoutDialog from "./LogoutDialog";
 
 const userProfile = [
-  {
-    label: "My Profile",
-    icon: UserCircleIcon,
-    value: "profile",
-  },
-  {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-    value: "edit profile",
-  },
-  {
-    label: "Carts",
-    icon: ShoppingCartIcon,
-    value: "carts",
-  },
-  {
-    label: "Help",
-    icon: LifebuoyIcon,
-    value: "help",
-  },
-  {
-    label: "Sign Out",
-    icon: PowerIcon,
-    value: "logout",
-  },
+  { label: "My Profile", icon: UserCircleIcon, value: "profile" },
+  { label: "Carts", icon: ShoppingCartIcon, value: "carts" },
+  // { label: "Help", icon: LifebuoyIcon, value: "help" },
+  { label: "Sign Out", icon: PowerIcon, value: "logout" },
 ];
+
 const adminProfile = [
-  {
-    label: "My Profile",
-    icon: UserCircleIcon,
-    value: "profile",
-  },
-  {
-    label: "Edit Profile",
-    icon: Cog6ToothIcon,
-    value: "edit profile",
-  },
-  {
-    label: "Admin box",
-    icon: InboxArrowDownIcon,
-    value: "box",
-  },
-  {
-    label: "products",
-    icon: ShoppingCartIcon,
-    value: "products",
-  },
-  {
-    label: "Sign Out",
-    icon: PowerIcon,
-    value: "logout",
-  },
+  { label: "My Profile", icon: UserCircleIcon, value: "profile" },
+  { label: "Cabins", icon: ShoppingCartIcon, value: "cabins" },
+  { label: "Sign Out", icon: PowerIcon, value: "logout" },
 ];
 
 function ProfileMenu({ user }) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [isDialogOpen, setIsDialogOpen] = React.useState(false); // Dialog control
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false); // Dialog control
   const dispatch = useDispatch();
   const nav = useNavigate();
+
   const closeMenu = () => setIsMenuOpen(false);
   const handleDialogOpen = () => setIsDialogOpen(!isDialogOpen); // Toggle dialog
 
@@ -101,6 +56,7 @@ function ProfileMenu({ user }) {
     dispatch(userLogOut());
     nav("/");
   };
+
   const menuItem = user.isAdmin ? adminProfile : userProfile;
 
   const handleClick = (val) => {
@@ -108,19 +64,20 @@ function ProfileMenu({ user }) {
       case "profile":
         nav("/userProfile");
         break;
-
       case "carts":
         nav("/carts");
         break;
-
-      case "products":
+      case "cabins":
         nav("/allProducts");
         break;
-
       case "logout":
         handleDialogOpen();
+        break;
+      default:
+        break;
     }
   };
+
   return (
     <>
       <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom-end">
@@ -184,50 +141,61 @@ function ProfileMenu({ user }) {
   );
 }
 
-// nav list component
+// NavList component
 const navListItems = [
-  {
-    label: "Our cabins",
-    href: "#cards-section", // Scrolls to "Discover our idyllic countryside cabins"
-  },
-  {
-    label: "Get inspired",
-    href: "#finding-section", // Scrolls to the Cards section
-  },
-  {
-    label: "Gift a stay",
-    href: "#questions-section", // Scrolls to the Video section
-  },
-  {
-    label: "About us",
-    href: "#about-us", // You can add this section if needed
-  },
+  { label: "Our cabins", href: "#cards-section" },
+  { label: "Get inspired", href: "#finding-section" },
+  { label: "Gift a stay", href: "#questions-section" },
+  { label: "About us", href: "/about" },
 ];
 
 function NavList() {
   const navigate = useNavigate();
+
+  const location = window.location.pathname; // Get current route
+
   const handleScroll = (href) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    if (href.startsWith("/")) {
+      // Navigate to external routes
+      navigate(href);
+    } else {
+      // Handle scrolling for internal page sections
+      if (location !== "/") {
+        // If not on the homepage, navigate to the homepage first
+        navigate("/"); // Redirect to homepage before scrolling
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        }, 100); // Adding delay to allow routing to homepage
+      } else {
+        // If already on the homepage, scroll smoothly to section
+        const element = document.querySelector(href);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }
     }
   };
+
   return (
-    <ul className="mt-2 mb-4 flex flex-col gap-5 md:ms-50 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
-      {navListItems.map(({ label, href }) => (
+    <ul className="mt-2 mb-4 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center">
+      {navListItems.map(({ label, href }, key) => (
         <Typography
           key={label}
           as="a"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             handleScroll(href);
-            navigate(href); // Updates the URL hash without reloading the page
+            navigate(href);
           }}
-          variant="medium"
+          variant="small"
           color="gray"
-          className="font-medium flex text-blue-gray-500"
+          className="font-medium text-blue-gray-500 cursor-pointer"
         >
           <MenuItem className="flex items-center gap-2 lg:rounded-full">
-            <span className="text-gray-900 font-bold"> {label}</span>
+            <span className="text-gray-900">{label}</span>
           </MenuItem>
         </Typography>
       ))}
@@ -235,32 +203,29 @@ function NavList() {
   );
 }
 
+// Header component
 const Header = () => {
   const { user } = useSelector((state) => state.userSlice);
   const nav = useNavigate();
-
-  const [isNavOpen, setIsNavOpen] = React.useState(false);
-
-  const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
-
+  const [isNavOpen, setIsNavOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
-  // Handle scroll to show/hide navbar
+  const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
+
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
 
     if (currentScrollY > lastScrollY) {
-      setShowNavbar(false); // Scrolling down, hide navbar
+      setShowNavbar(false);
     } else {
-      setShowNavbar(true); // Scrolling up, show navbar
+      setShowNavbar(true);
     }
 
     setLastScrollY(currentScrollY);
   };
 
   React.useEffect(() => {
-    // Resize listener (already present in your code)
     const handleResize = () => {
       if (window.innerWidth >= 960) {
         setIsNavOpen(false);
@@ -268,12 +233,9 @@ const Header = () => {
     };
 
     window.addEventListener("resize", handleResize);
-
-    // Scroll listener (newly added for scroll detection)
     window.addEventListener("scroll", handleScroll);
 
     return () => {
-      // Clean up both listeners on unmount
       window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
@@ -285,19 +247,17 @@ const Header = () => {
         showNavbar ? "translate-y-0" : "-translate-y-full"
       }`}
     >
-      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900 ">
-        <div className="pr-40">
-          <Typography
-            as="a"
-            variant="h3"
-            href="#"
-            color="green"
-            onClick={() => nav("/")}
-            className="mr-4 ml-2  cursor-pointer py-1.5 pr-10 font-bold"
-          >
-            UNWINCABINS
-          </Typography>
-        </div>
+      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
+        <Typography
+          as="a"
+          href="#"
+          color="green"
+          variant="h3"
+          onClick={() => nav("/")}
+          className="mr-4 ml-2 cursor-pointer py-1.5 pr-10 font-bold"
+        >
+          UNWINDCABINS
+        </Typography>
 
         <div className="hidden lg:block">
           <NavList />
@@ -307,14 +267,16 @@ const Header = () => {
           color="blue-gray"
           variant="text"
           onClick={toggleIsNavOpen}
-          className="ml-auto mr-2 lg:hidden"
+          className="ml-auto mr-2 lg:hidden" // Visible on small screens, hidden on lg and above
         >
-          <Bars2Icon className="h-6 pl-14 w-6" />
+          <Bars2Icon className="h-6 w-6" />
         </IconButton>
-        {user === null ? (
-          <div className="pr-14">
+
+        {/* Visible only on larger screens */}
+        {user === null && (
+          <div className="hidden lg:flex lg:gap-4">
             <Button onClick={() => nav("/login")} size="sm" variant="text">
-              <span>Log In</span>
+              Log In
             </Button>
             <Button
               onClick={() => nav("/signup")}
@@ -322,17 +284,43 @@ const Header = () => {
               color="red"
               variant="text"
             >
-              <span>Sign Up</span>
+              Sign Up
             </Button>
           </div>
-        ) : (
-          <ProfileMenu user={user} />
         )}
+
+        {user !== null && <ProfileMenu user={user} />}
       </div>
-      <MobileNav open={isNavOpen} className="overflow-scroll">
+
+      {/* Mobile Nav */}
+      <MobileNav open={isNavOpen}>
         <NavList />
+
+        {/* Show Log In / Sign Up in Mobile Nav */}
+        {user === null && (
+          <div className="flex items-center gap-4 mt-4">
+            <Button
+              onClick={() => nav("/login")}
+              size="sm"
+              variant="text"
+              fullWidth
+            >
+              Log In
+            </Button>
+            <Button
+              onClick={() => nav("/signup")}
+              size="sm"
+              color="red"
+              variant="text"
+              fullWidth
+            >
+              Sign Up
+            </Button>
+          </div>
+        )}
       </MobileNav>
     </Navbar>
   );
 };
+
 export default Header;

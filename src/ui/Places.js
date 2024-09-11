@@ -28,7 +28,7 @@ const Places = () => {
       <div className="text-end mb-6">
         <Link to="/all-cards">
           <Button className="bg-green-500 text-white py-2 px-4 rounded">
-            View All Products
+            View All Cabins
           </Button>
         </Link>
       </div>
@@ -202,7 +202,7 @@ const Places = () => {
                     size="lg"
                     fullWidth
                   >
-                    Reserve
+                    See more
                   </Button>
                 </CardFooter>
               </Card>

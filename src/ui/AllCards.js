@@ -15,6 +15,7 @@ import {
 import { useNavigate } from "react-router";
 import { imageUrl } from "../constant/constant";
 import Search from "./Search";
+import Footer from "./Footer";
 const Places = () => {
   const nav = useNavigate();
   const { data, isLoading, error } = useGetProductsQuery();
@@ -217,6 +218,7 @@ const Places = () => {
           }
         )}
       </div>
+      <Footer />
     </div>
   );
 };

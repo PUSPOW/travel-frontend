@@ -17,6 +17,7 @@ import { clearCart, setToCart } from "./CartSlice";
 import { useAddOrderMutation } from "../orders/orderApi";
 import { toast } from "react-toastify";
 import CostumDialog from "../../ui/CostumDialog";
+import Footer from "../../ui/Footer";
 
 const CartPage = () => {
   const [addOrder, { isLoading }] = useAddOrderMutation();
@@ -447,6 +448,7 @@ const CartPage = () => {
           );
         })}
       </div>
+      <Footer />
 
       <CostumDialog
         open={open}

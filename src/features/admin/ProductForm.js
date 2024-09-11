@@ -75,15 +75,15 @@ const ProductForm = () => {
       className="max-w-sm  mx-auto mt-4 mb-4"
     >
       <Typography variant="h4" color="blue-gray">
-        Add Product
+        Add Cabin
       </Typography>
 
       <form onSubmit={handleSubmit} className="mt-2">
         <div className="mb-1 flex flex-col gap-3 space-y-2">
           <Input
             size="lg"
-            placeholder="product_name"
-            label="product_name"
+            placeholder="cabin_name"
+            label="cabin_name"
             name="product_name"
             onChange={handleChange}
           />
@@ -93,8 +93,8 @@ const ProductForm = () => {
 
           <Input
             size="lg"
-            placeholder="product_place"
-            label="product_place"
+            placeholder="cabin_place"
+            label="cabin_place"
             name="product_place"
             onChange={handleChange}
           />
@@ -104,8 +104,8 @@ const ProductForm = () => {
 
           <Input
             size="lg"
-            placeholder="product_price"
-            label="product_price"
+            placeholder="cabin_price"
+            label="cabin_price"
             name="product_price"
             onChange={handleChange}
           />
@@ -125,8 +125,8 @@ const ProductForm = () => {
 
           <Textarea
             size="lg"
-            placeholder="product_detail"
-            label="product_detail"
+            placeholder="cabin_detail"
+            label="cabin_detail"
             name="product_detail"
             onChange={handleChange}
           />

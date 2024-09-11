@@ -26,10 +26,10 @@ const Home = () => {
 
   return (
     <div>
-      <div className="p-5">
+      <div className="pr-5 pl-5">
         <Carosul />
       </div>
-      <div className="flex justify-center -mt-24 z-30 ">
+      <div className="flex justify-center -mt-12 z-30 ">
         <Search />
       </div>
       <div>
@@ -58,7 +58,7 @@ const Home = () => {
       <div>
         <Carosol />
       </div>
-      <div id="questions-section">
+      <div>
         <Video />
       </div>
       <div>
@@ -67,7 +67,7 @@ const Home = () => {
       <div>
         <Questions />
       </div>
-      <div>
+      <div id="questions-section">
         <Cabinfind />
       </div>
       <div>

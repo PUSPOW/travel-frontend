@@ -40,7 +40,7 @@ const AdminProducts = () => {
           color="deep-purple"
           size="lg"
         >
-          Add Product
+          Add Cabins
         </Button>
       </div>
 
