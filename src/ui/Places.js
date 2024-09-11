@@ -21,7 +21,7 @@ const Places = () => {
   const [showAll, setShowAll] = useState(false); // Added for managing card display
 
   if (isLoading) return <h1>Loading......</h1>;
-  const cardsToDisplay = showAll ? data?.data : data?.data.slice(0, 4);
+  const cardsToDisplay = showAll ? data?.data : data?.data.slice(0, 6);
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,6 +41,7 @@ const Places = () => {
             product_detail,
             product_price,
             rating,
+            available,
             product_image,
           }) => {
             return (
@@ -130,6 +131,12 @@ const Places = () => {
                         NPR. {product_price}
                       </Typography>
                     </div>
+                    <div>
+                      <Typography className="space-y-5">
+                        Available: {available ? "yes" : "not"}
+                      </Typography>
+                    </div>
+
                     <div className="mt-2 flex gap-2">
                       <Tooltip content="Free wifi">
                         <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10">

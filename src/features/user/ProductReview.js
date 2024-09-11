@@ -1,6 +1,6 @@
 /** @format */
 
-import { Button, Rating, Textarea } from "@material-tailwind/react";
+import { Button, Rating, Textarea, Typography } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import React from "react";
 import * as Yup from "yup";
@@ -41,29 +41,37 @@ const ProductReview = ({ user, id, reviews }) => {
   return (
     <div className="space-y-2 p-7">
       {!user?.isAdmin && user && (
-        <div>
-          <h1>Add Review here</h1>
+        <div className="space-y-3">
+          <Typography className="flex items-center" variant="h3">
+            Rating and Reviews
+          </Typography>
           <form onSubmit={handleSubmit}>
-            <div className="w-96 space-y-2">
+            <div className="w-96  flex justify-between">
+              <h1>Tap to rate:</h1>
               <Rating
+                className="items-center"
                 onChange={(e) => setFieldValue("rating", e)}
                 name="rating"
               />
+            </div>
+            <div className="w-96">
               <Textarea
-                label="Message"
+                label="Write a review"
                 name="comment"
                 onChange={handleChange}
               />
             </div>
-            <Button
-              loading={isLoading}
-              type="submit"
-              className="mt-6 w-[10%]"
-              size="sm"
-              fullWidth
-            >
-              Submit
-            </Button>
+            <div className="justify-end flex w-96">
+              <Button
+                className="flex w-[20%]"
+                loading={isLoading}
+                type="submit"
+                size="sm"
+                fullWidth
+              >
+                Submit
+              </Button>
+            </div>
           </form>
         </div>
       )}
@@ -71,9 +79,11 @@ const ProductReview = ({ user, id, reviews }) => {
       <div className="mt-5">
         {reviews.map(({ _id, comment, rating, user }) => {
           return (
-            <div key={_id} className=" space-y-1">
-              <h1>{user.username}</h1>
-              <Rating value={rating} readonly />
+            <div key={_id} className=" space-y-4 w-96">
+              <div className="flex justify-between">
+                <Rating value={rating} readonly />
+                <h1>{user.username}</h1>
+              </div>
               <p>{comment}</p>
             </div>
           );

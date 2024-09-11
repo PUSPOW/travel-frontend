@@ -40,13 +40,7 @@ const Detail = () => {
       <div className="flex justify-center">
         <Search />
       </div>
-      <Typography
-        variant="h3"
-        color="blue-gray"
-        className="font-bold flex justify-center"
-      >
-        Please fill the form before you reserve
-      </Typography>
+
       <div className="p-5 flex flex-col lg:flex-row gap-10">
         <div className="w-full lg:w-1/2 max-w-[48rem] mx-auto my-8">
           <Card className="w-full flex-col md:flex-row shadow-lg rounded-lg overflow-hidden">
@@ -114,7 +108,7 @@ const Detail = () => {
                 Rs. {product.product_price}
               </Typography>
               <Typography className="mb-4 text-sm">
-                Available: {product.available}
+                Available: {product.available ? "yes" : "not"}
               </Typography>
 
               <div className="flex items-center mb-4">
@@ -219,15 +213,6 @@ const Detail = () => {
         </div>
 
         <div> {product && <AddCart product={product} />}</div>
-      </div>
-      <div id="cards-section" className="space-y-3 ml-8 pt-10">
-        <Typography
-          variant="h3"
-          color="blue-gray"
-          className="font-bold flex justify-center"
-        >
-          See more cabins...
-        </Typography>
       </div>
       <div>
         <Places />
@@ -487,7 +472,7 @@ export const AddCart = ({ product }) => {
           </thead>
         </table>
         <div className="flex justify-center pt-7">
-          <Button onClick={handleSubmit}>Add To Cart</Button>
+          <Button onClick={handleSubmit}>Ready to reserve</Button>
         </div>
       </Card>
     </div>

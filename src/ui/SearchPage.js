@@ -48,6 +48,7 @@ const SearchPage = () => {
             product_place,
             product_price,
             rating,
+            available,
           }) => {
             return (
               <Card
@@ -136,6 +137,12 @@ const SearchPage = () => {
                         NPR. {product_price}
                       </Typography>
                     </div>
+                    <div>
+                      <Typography className="space-y-5">
+                        Available: {available ? "yes" : "not"}
+                      </Typography>
+                    </div>
+
                     <div className="mt-2 flex gap-2">
                       <Tooltip content="Free wifi">
                         <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10">

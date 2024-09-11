@@ -25,7 +25,7 @@ const ProductForm = () => {
     product_place: Yup.string().required(),
     product_detail: Yup.string().required(),
     product_price: Yup.number().required(),
-    available: Yup.string().required(),
+    available: Yup.boolean().required(),
     product_image: Yup.mixed()
       .required()
       .test("fileType", "invalid image", (e) => {
@@ -40,7 +40,7 @@ const ProductForm = () => {
         product_place: "",
         product_detail: "",
         product_price: "",
-        available: "",
+        available: true,
         product_image: null,
         imageReview: "",
       },
@@ -112,13 +112,14 @@ const ProductForm = () => {
           {errors.product_price && touched.product_price && (
             <h1 className="text-pink-700">{errors.product_price}</h1>
           )}
-          <Input
-            size="lg"
-            placeholder="available"
-            label="available"
-            onChange={handleChange}
+          <Select
+            label="Available"
             name="available"
-          />
+            onChange={(value) => setFieldValue("available", value === "yes")}
+          >
+            <Option value="yes">Yes</Option>
+            <Option value="no">No</Option>
+          </Select>
           {errors.available && touched.available && (
             <h1 className="text-pink-700">{errors.available}</h1>
           )}
