@@ -28,6 +28,8 @@ import { useNavigate } from "react-router";
 import { userLogOut } from "../features/auth/userSlice";
 import { clearCart } from "../features/user/CartSlice";
 import LogoutDialog from "./LogoutDialog";
+import Login from "../features/auth/Login";
+import SignUp from "../features/auth/SignUp";
 
 const userProfile = [
   { label: "My Profile", icon: UserCircleIcon, value: "profile" },
@@ -213,6 +215,12 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
+  const [openLoginDialog, setOpenLoginDialog] = useState(false);
+
+  const handleOpenLoginDialog = () => setOpenLoginDialog(!openLoginDialog);
+  const [openSignInDialog, setOpenSignInDialog] = useState(false);
+
+  const handleOpenSignInDialog = () => setOpenSignInDialog(!openSignInDialog);
 
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
@@ -243,91 +251,89 @@ const Header = () => {
   }, [lastScrollY]);
 
   return (
-    <Navbar
-      className={`sticky z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-green-100 mx-auto shadow-none p-3 lg:rounded lg:pl-6 top-0 left-0 right-0 transition-transform duration-300 ${
-        showNavbar ? "translate-y-0" : "-translate-y-full"
-      }`}
-    >
-      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-        <Typography
-          as="a"
-          href="#"
-          color="green"
-          variant="h3"
-          onClick={() => nav("/")}
-          className="mr-4 ml-2 cursor-pointer py-1.5 pr-10 font-bold"
-        >
-          UNWINDCABINS
-        </Typography>
+    <>
+      <Navbar
+        className={`sticky z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-green-100 mx-auto shadow-none p-3 lg:rounded lg:pl-6 top-0 left-0 right-0 transition-transform duration-300 ${
+          showNavbar ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
+          <Typography
+            as="a"
+            href="#"
+            color="green"
+            variant="h3"
+            onClick={() => nav("/")}
+            className="mr-4 ml-2 cursor-pointer py-1.5 pr-10 font-bold"
+          >
+            UNWINDCABINS
+          </Typography>
 
-        <div className="hidden lg:block">
-          <NavList closeNav={() => setIsNavOpen(false)} />
+          <div className="hidden lg:block">
+            <NavList closeNav={() => setIsNavOpen(false)} />
+          </div>
+
+          <IconButton
+            size="sm"
+            color="blue-gray"
+            variant="text"
+            onClick={toggleIsNavOpen}
+            className="ml-auto mr-2 lg:hidden" // Visible on small screens, hidden on lg and above
+          >
+            <Bars2Icon className="h-6 w-6" />
+          </IconButton>
+
+          {/* Visible only on larger screens */}
+          {user === null && (
+            <div className="hidden lg:flex lg:gap-4">
+              <Button onClick={handleOpenLoginDialog} size="sm" variant="text">
+                Log In
+              </Button>
+              <Button
+                onClick={handleOpenSignInDialog}
+                size="sm"
+                color="red"
+                variant="text"
+              >
+                Sign Up
+              </Button>
+            </div>
+          )}
+
+          {user !== null && <ProfileMenu user={user} />}
         </div>
 
-        <IconButton
-          size="sm"
-          color="blue-gray"
-          variant="text"
-          onClick={toggleIsNavOpen}
-          className="ml-auto mr-2 lg:hidden" // Visible on small screens, hidden on lg and above
-        >
-          <Bars2Icon className="h-6 w-6" />
-        </IconButton>
-
-        {/* Visible only on larger screens */}
-        {user === null && (
-          <div className="hidden lg:flex lg:gap-4">
-            <Button onClick={() => nav("/login")} size="sm" variant="text">
-              Log In
-            </Button>
-            <Button
-              onClick={() => nav("/signup")}
-              size="sm"
-              color="red"
-              variant="text"
-            >
-              Sign Up
-            </Button>
-          </div>
-        )}
-
-        {user !== null && <ProfileMenu user={user} />}
-      </div>
-
-      {/* Mobile Nav */}
-      <MobileNav open={isNavOpen}>
-        <NavList closeNav={() => setIsNavOpen(false)} />{" "}
-        {/* Pass closeNav to NavList */}
-        {/* Show Log In / Sign Up in Mobile Nav */}
-        {user === null && (
-          <div className="flex items-center gap-4 mt-4">
-            <Button
-              onClick={() => {
-                setIsNavOpen(false);
-                nav("/login");
-              }}
-              size="sm"
-              variant="text"
-              fullWidth
-            >
-              Log In
-            </Button>
-            <Button
-              onClick={() => {
-                setIsNavOpen(false);
-                nav("/signup");
-              }}
-              size="sm"
-              color="red"
-              variant="text"
-              fullWidth
-            >
-              Sign Up
-            </Button>
-          </div>
-        )}
-      </MobileNav>
-    </Navbar>
+        {/* Mobile Nav */}
+        <MobileNav open={isNavOpen}>
+          <NavList closeNav={() => setIsNavOpen(false)} />{" "}
+          {/* Pass closeNav to NavList */}
+          {/* Show Log In / Sign Up in Mobile Nav */}
+          {user === null && (
+            <div className="flex items-center gap-4 mt-4">
+              <Button
+                onClick={handleOpenLoginDialog}
+                size="sm"
+                variant="text"
+                fullWidth
+              >
+                Log In
+              </Button>
+              <Button
+                onClick={handleOpenSignInDialog}
+                size="sm"
+                color="red"
+                variant="text"
+                fullWidth
+              >
+                Sign Up
+              </Button>
+            </div>
+          )}
+        </MobileNav>
+      </Navbar>
+      <Login open={openLoginDialog} handleOpen={handleOpenLoginDialog} />
+      <SignUp open={openSignInDialog} handleOpen={handleOpenSignInDialog} />
+    </>
   );
 };
 
