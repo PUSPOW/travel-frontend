@@ -28,8 +28,6 @@ import { useNavigate } from "react-router";
 import { userLogOut } from "../features/auth/userSlice";
 import { clearCart } from "../features/user/CartSlice";
 import LogoutDialog from "./LogoutDialog";
-import Login from "../features/auth/Login";
-import SignUp from "../features/auth/SignUp";
 
 const userProfile = [
   { label: "My Profile", icon: UserCircleIcon, value: "profile" },
@@ -149,6 +147,7 @@ const navListItems = [
   { label: "Get inspired", href: "#finding-section" },
   { label: "Gift a stay", href: "#questions-section" },
   { label: "About us", href: "/about" },
+  { label: "Contact us", href: "/contact" },
 ];
 
 function NavList({ closeNav }) {
@@ -215,13 +214,6 @@ const Header = () => {
   const [lastScrollY, setLastScrollY] = useState(0);
 
   const toggleIsNavOpen = () => setIsNavOpen((cur) => !cur);
-  const [openLoginDialog, setOpenLoginDialog] = useState(false);
-
-  const handleOpenLoginDialog = () => setOpenLoginDialog(!openLoginDialog);
-  const [openSignInDialog, setOpenSignInDialog] = useState(false);
-
-  const handleOpenSignInDialog = () => setOpenSignInDialog(!openSignInDialog);
-
   const handleScroll = () => {
     const currentScrollY = window.scrollY;
 
@@ -286,11 +278,11 @@ const Header = () => {
           {/* Visible only on larger screens */}
           {user === null && (
             <div className="hidden lg:flex lg:gap-4">
-              <Button onClick={handleOpenLoginDialog} size="sm" variant="text">
+              <Button onClick={() => nav("/login")} size="sm" variant="text">
                 Log In
               </Button>
               <Button
-                onClick={handleOpenSignInDialog}
+                onClick={() => nav("/signup")}
                 size="sm"
                 color="red"
                 variant="text"
@@ -311,7 +303,7 @@ const Header = () => {
           {user === null && (
             <div className="flex items-center gap-4 mt-4">
               <Button
-                onClick={handleOpenLoginDialog}
+                onClick={() => nav("/login")}
                 size="sm"
                 variant="text"
                 fullWidth
@@ -319,7 +311,7 @@ const Header = () => {
                 Log In
               </Button>
               <Button
-                onClick={handleOpenSignInDialog}
+                onClick={() => nav("/signup")}
                 size="sm"
                 color="red"
                 variant="text"
@@ -331,8 +323,6 @@ const Header = () => {
           )}
         </MobileNav>
       </Navbar>
-      <Login open={openLoginDialog} handleOpen={handleOpenLoginDialog} />
-      <SignUp open={openSignInDialog} handleOpen={handleOpenSignInDialog} />
     </>
   );
 };

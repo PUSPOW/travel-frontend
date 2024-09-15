@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../features/shared/productApi";
 import {
   Card,

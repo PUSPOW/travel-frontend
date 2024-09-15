@@ -22,6 +22,7 @@ import AllCards from "./ui/AllCards";
 import Video from "./ui/Video";
 import Finding from "./ui/Finding";
 import AboutUs from "./ui/AboutUs";
+import Contact from "./ui/Contact";
 
 const App = () => {
   const Router = createBrowserRouter([
@@ -65,6 +66,7 @@ const App = () => {
         { path: "questions-section", element: <Video /> },
         { path: "video", element: <Finding /> },
         { path: "about", element: <AboutUs /> },
+        { path: "contact", element: <Contact /> },
       ],
     },
   ]);

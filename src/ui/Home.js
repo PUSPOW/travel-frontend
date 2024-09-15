@@ -11,10 +11,12 @@ import Cabinfind from "./Cabinfind";
 import Footer from "./Footer";
 import Places from "./Places";
 import { Typography } from "@material-tailwind/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Home = () => {
+  const [active, setactive] = useState();
   useEffect(() => {
+    window.scrollTo(0, 0);
     const hash = window.location.hash;
     if (hash) {
       const element = document.querySelector(hash);
@@ -22,7 +24,7 @@ const Home = () => {
         element.scrollIntoView({ behavior: "smooth" });
       }
     }
-  }, []); // Empty dependency array ensures this runs once when the component mounts
+  }, [active]); // Empty dependency array ensures this runs once when the component mounts
 
   return (
     <div>

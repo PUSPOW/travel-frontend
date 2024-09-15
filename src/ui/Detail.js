@@ -472,7 +472,9 @@ export const AddCart = ({ product }) => {
           </thead>
         </table>
         <div className="flex justify-center pt-7">
-          <Button onClick={handleSubmit}>Ready to reserve</Button>
+          <Button disabled={user?.isAdmin || !user} onClick={handleSubmit}>
+            Ready to reserve
+          </Button>
         </div>
       </Card>
     </div>

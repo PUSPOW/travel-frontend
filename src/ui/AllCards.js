@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useGetProductsQuery } from "../features/shared/productApi";
 import {
   Card,
@@ -19,6 +19,10 @@ import Footer from "./Footer";
 const Places = () => {
   const nav = useNavigate();
   const { data, isLoading, error } = useGetProductsQuery();
+  const [active, setactive] = useState();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [active]);
   if (isLoading) return <h1>Loading......</h1>;
 
   return (
