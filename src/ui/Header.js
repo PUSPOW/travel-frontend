@@ -159,7 +159,7 @@ function NavList({ closeNav }) {
     closeNav();
     if (href.startsWith("/")) {
       // Navigate to external routes
-      navigate(href);
+      navigate("/");
     } else {
       // Handle scrolling for internal page sections
       if (location !== "/") {

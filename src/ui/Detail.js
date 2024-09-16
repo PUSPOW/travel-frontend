@@ -25,14 +25,14 @@ import ProductReview from "../features/user/ProductReview";
 import Places from "./Places";
 import Search from "./Search";
 import Footer from "./Footer";
-
+import Skeleton from "./Skeleton";
 const Detail = () => {
   const { id } = useParams();
   const { data, isLoading, error } = useGetProductByIdQuery(id);
   const { user } = useSelector((state) => state.userSlice);
 
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Skeleton />;
   }
   const product = data?.data;
   return (

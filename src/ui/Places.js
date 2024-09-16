@@ -15,12 +15,13 @@ import {
 import { useNavigate } from "react-router";
 import { imageUrl } from "../constant/constant";
 import { Link } from "react-router-dom";
+import Skeleton from "./Skeleton";
 const Places = () => {
   const nav = useNavigate();
   const { data, isLoading, error } = useGetProductsQuery();
   const [showAll, setShowAll] = useState(false); // Added for managing card display
 
-  if (isLoading) return <h1>Loading......</h1>;
+  if (isLoading) return <Skeleton />;
   const cardsToDisplay = showAll ? data?.data : data?.data.slice(0, 6);
 
   return (

@@ -1,6 +1,7 @@
 /** @format */
 
 import React from "react";
+import Skeleton from "./Skeleton";
 import {
   Carousel,
   Typography,
@@ -10,7 +11,10 @@ import {
   Rating,
 } from "@material-tailwind/react";
 
-const Carosul = () => {
+const Carosul = ({ isLoading }) => {
+  if (isLoading) {
+    return <Skeleton />;
+  }
   return (
     <div className="relative h-full w-full">
       <img
