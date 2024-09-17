@@ -72,7 +72,7 @@ const CartPage = () => {
         {carts.map((cart) => {
           return (
             <div
-              className="flex flex-col sm:flex-row lg:flex-row gap-4"
+              className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4"
               key={cart._id}
             >
               <div className="flex justify-center px-4">
@@ -432,15 +432,13 @@ const CartPage = () => {
                 </div>
                 <div className="flex justify-between">
                   <h1>Total</h1>
-                  <p>NPR {total}</p>
-                </div>
-                <div>
+                  <p className="underline">NPR {total}</p>
                   <Button
                     loading={isLoading}
                     onClick={handleOpen}
-                    className="mt-10 ml-14 items-center "
+                    className="flex items-center"
                   >
-                    Place An Order
+                    Reserve
                   </Button>
                 </div>
               </div>

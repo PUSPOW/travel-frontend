@@ -92,7 +92,7 @@ function ProfileMenu({ user }) {
               size="sm"
               alt="tania andrew"
               className="border border-gray-900 p-0.5"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
+              src="https://i.pinimg.com/originals/98/1d/6b/981d6b2e0ccb5e968a0618c8d47671da.jpg"
             />
             <ChevronDownIcon
               strokeWidth={2.5}
@@ -245,9 +245,7 @@ const Header = () => {
   return (
     <>
       <Navbar
-        className={`sticky z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-green-100 mx-auto shadow-none p-3 lg:rounded lg:pl-6 top-0 left-0 right-0 transition-transform duration-300 ${
-          showNavbar ? "translate-y-0" : "-translate-y-full"
-        }`}
+        className={`sticky z-10 h-max max-w-full rounded-none px-4 py-2 lg:px-8 lg:py-4 bg-green-100 mx-auto shadow-none p-3 lg:rounded lg:pl-6 top-0 left-0 right-0 transition-transform duration-300`}
       >
         <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
           <Typography

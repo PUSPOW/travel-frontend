@@ -31,7 +31,7 @@ const Login = () => {
         dispatch(setUser(response));
 
         toast.success("success");
-        nav(-1);
+        nav("/");
       } catch (err) {
         toast.error(err.data?.message);
       }
@@ -95,7 +95,7 @@ const Login = () => {
             </Button>
             <Typography color="gray" className="mt-4 text-center font-normal">
               Dont have an account ?
-              <button type="button" onClick={() => nav("signup")}>
+              <button type="button" onClick={() => nav("/signup")}>
                 Sign Up
               </button>
             </Typography>

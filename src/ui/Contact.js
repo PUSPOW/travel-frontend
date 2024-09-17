@@ -26,11 +26,12 @@ const Contact = () => {
       <Typography
         variant="h2"
         color="blue-gray"
-        className="font-bold flex justify-center"
+        className="font-bold text-3xl md:text-4xl lg:text-5xl text-center p-4"
       >
         Contact our team{" "}
       </Typography>
-      <div className=" flex justify-center">
+
+      <div className="flex flex-col md:flex-row justify-center px-4 py-8 md:py-12">
         <div className="w-[600px] pl-5 pt-5 gap-5">
           <div className="w-72 flex pr-5 pt-5 gap-5">
             <Input

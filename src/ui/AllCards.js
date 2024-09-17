@@ -38,7 +38,7 @@ const Places = () => {
       >
         Discover our idyllic countryside cabins
       </Typography>
-      <div className="p-5 grid grid-cols-4 gap-2">
+      <div className="p-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {data?.data.map(
           ({
             _id,
@@ -52,7 +52,7 @@ const Places = () => {
             return (
               <Card
                 key={_id}
-                className="w-full h-[500px] max-w-[26rem] shadow-lg -space-y-4"
+                className="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg shadow-lg relative"
               >
                 <CardHeader floated={false} color="blue-gray">
                   <img src={`${imageUrl}${product_image}`} />

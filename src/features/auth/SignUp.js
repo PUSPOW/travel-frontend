@@ -28,7 +28,7 @@ const SignUp = () => {
         const response = await registerUser(val).unwrap();
 
         toast.success("successfully Register");
-        nav(-1);
+        nav("/");
       } catch (err) {
         toast.error(err.data?.message);
       }
