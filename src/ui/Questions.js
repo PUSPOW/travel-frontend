@@ -2,8 +2,10 @@
 
 import { Button, Typography } from "@material-tailwind/react";
 import React from "react";
+import { useNavigate } from "react-router";
 
 const Questions = () => {
+  const nav = useNavigate();
   return (
     <div className="space-y-8 p-10">
       <Typography
@@ -24,7 +26,10 @@ const Questions = () => {
               <li>Why did you start this journey?</li>
             </ul>
           </div>
-          <button className="mt-4 md:mt-0 h-12 px-6 rounded-lg text-white bg-blue-500 flex items-center justify-between">
+          <button
+            onClick={() => nav("/about")}
+            className="mt-4 md:mt-0 h-12 px-6 rounded-lg text-white bg-blue-500 flex items-center justify-between"
+          >
             <p>About Unwind Cabins</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +58,10 @@ const Questions = () => {
               <li>How do I get to the cabin?</li>
             </ul>
           </div>
-          <button className="mt-4 md:mt-0 h-12 px-6 rounded-lg text-white bg-blue-500 flex items-center justify-between">
+          <button
+            onClick={() => nav("/about")}
+            className="mt-4 md:mt-0 h-12 px-6 rounded-lg text-white bg-blue-500 flex items-center justify-between"
+          >
             <p>Tell me more about your Cabins</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +90,10 @@ const Questions = () => {
               <li>How many people do your cabins sleep?</li>
             </ul>
           </div>
-          <button className="mt-4 md:mt-0 h-12 px-6 rounded-lg text-white bg-blue-500 flex items-center justify-between">
+          <button
+            onClick={() => nav("/about")}
+            className="mt-4 md:mt-0 h-12 px-6 rounded-lg text-white bg-blue-500 flex items-center justify-between"
+          >
             <p>Pets, Family, and Friends</p>
             <svg
               xmlns="http://www.w3.org/2000/svg"

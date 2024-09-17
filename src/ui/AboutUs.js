@@ -21,6 +21,30 @@ const AboutUs = () => {
             make travel accessible for everyone, connecting travelers with
             unique and unforgettable experiences.
           </p>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+            How long have we been in business?{" "}
+          </h3>
+          <p className="text-gray-700 leading-relaxed">
+            The journey started with the goal of making sophisticated AI
+            technology accessible and useful to as many people as possible. The
+            idea was to create a tool that could understand and generate
+            human-like text, helping with everything from answering questions to
+            providing creative writing assistance. The overarching mission is to
+            make information and communication more efficient and effective,
+            whether for personal, educational, or professional purposes.
+          </p>
+          <h3 className="text-2xl font-semibold text-gray-800 mb-4">
+            Why did we start this journey?{" "}
+          </h3>
+          <p className="text-gray-700 leading-relaxed">
+            Personal Enthusiasm: Many people start travel websites because they
+            have a deep passion for travel and want to share their experiences
+            and insights with others.
+          </p>
+          <p>
+            Desire to Inspire: There's a drive to inspire others to explore new
+            destinations and discover unique experiences.
+          </p>
         </div>
 
         {/* Why Us */}
